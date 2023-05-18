@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
   final Function() openTheDrawer;
-  const Header({Key? key, required this.openTheDrawer}) : super(key: key);
+  final String name;
+  const Header({Key? key, required this.openTheDrawer, required this.name})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class Header extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        "Hello Subham",
+                        "Hello $name",
                         style: TextStyle(letterSpacing: 3.5),
                         textAlign: TextAlign.center,
                       ),

@@ -1,9 +1,12 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_element, avoid_unnecessary_containers, unused_local_variable
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_element, avoid_unnecessary_containers, unused_local_variable, avoid_print, unused_import
+
+import 'dart:convert';
 
 import 'package:fitness_app/components/bottomNavbar.dart';
 import 'package:fitness_app/components/drawerComponent.dart';
 import 'package:fitness_app/components/header.dart';
 import "package:flutter/material.dart";
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key? key}) : super(key: key);
@@ -17,6 +20,23 @@ class _DashboardState extends State<Dashboard> {
 
   void openTheDrawer() {
     _scaffoldKey.currentState?.openEndDrawer();
+  }
+
+  String name = "User";
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    print("The UD is");
+    print(prefs.getString('userData'));
+    // setState(() {
+    //   name = ud["name"];
+    // });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
   }
 
   @override
@@ -46,6 +66,7 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       Header(
                         openTheDrawer: openTheDrawer,
+                        name: name,
                       ),
                       SizedBox(
                         height: getHeight(0.05),

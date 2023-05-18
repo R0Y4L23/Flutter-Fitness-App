@@ -27,7 +27,8 @@ class GenderSelection extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: getWidth(0.2)),
           child: Text(
             "Lets Us Know Who You Are?",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+            style: TextStyle(
+                fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white),
             textAlign: TextAlign.center,
           ),
         ),
@@ -36,7 +37,7 @@ class GenderSelection extends StatelessWidget {
         ),
         Container(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.grey.shade900,
               borderRadius: BorderRadius.circular(10.0),
             ),
             padding: EdgeInsets.all(16.0),
@@ -65,13 +66,13 @@ class GenderSelection extends StatelessWidget {
                     )),
                 Image.asset(
                   "assets/man.png",
-                  height: getHeight(0.23),
+                  height: getHeight(0.24),
                 )
               ],
             )),
         Container(
             decoration: BoxDecoration(
-              color: Colors.pink,
+              color: Colors.grey.shade800,
               borderRadius: BorderRadius.circular(10.0),
             ),
             padding: EdgeInsets.all(16.0),
@@ -82,7 +83,7 @@ class GenderSelection extends StatelessWidget {
               children: [
                 Image.asset(
                   "assets/woman.png",
-                  height: getHeight(0.23),
+                  height: getHeight(0.24),
                 ),
                 Container(
                     decoration: BoxDecoration(

@@ -47,6 +47,7 @@ class _MealPlannerState extends State<MealPlanner> {
                     children: [
                       Header(
                         openTheDrawer: openTheDrawer,
+                        name: '',
                       ),
                       SizedBox(
                         height: getHeight(0.05),

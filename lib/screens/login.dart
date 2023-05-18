@@ -5,6 +5,7 @@ import "package:fitness_app/screens/auth.dart";
 import "package:fitness_app/screens/dashboard.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
+import "package:shared_preferences/shared_preferences.dart";
 import "../connection/connect.dart";
 
 class Login extends StatefulWidget {
@@ -20,26 +21,48 @@ class _LoginState extends State<Login> {
   String _email = '';
   String _password = '';
 
-  Future<void> signUpWithEmail(String email, String password) async {
-    try {
-      final response = await AppwriteService.account.createEmailSession(
-        email: email,
-        password: password,
-      );
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Dashboard()),
-      );
-
-      print(response.toString());
-    } catch (e) {
-      print('Error creating session: ${e.toString()}');
-    }
+  void _showToast(BuildContext context, String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(text),
+        backgroundColor: Colors.red,
+        action: SnackBarAction(
+          label: 'CLOSE',
+          onPressed: scaffold.hideCurrentSnackBar,
+          textColor: Colors.white,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    Future<void> signInWithEmail(String email, String password) async {
+      try {
+        final response = await AppwriteService.account.createEmailSession(
+          email: email,
+          password: password,
+        );
+
+        final dbResponse = await AppwriteService.databases.getDocument(
+            databaseId: '6465cc04e7f8f24a9007',
+            collectionId: '6465cc125d0ecc4907b9',
+            documentId: response.userId);
+
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('userData', dbResponse.data.toString());
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Dashboard()),
+        );
+      } catch (e) {
+        print(e.toString());
+        _showToast(context, "Email Or Password Is Wrong.");
+      }
+    }
+
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
@@ -168,7 +191,7 @@ class _LoginState extends State<Login> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             print('Email: $_email, Password: $_password');
-                            signUpWithEmail(_email, _password);
+                            signInWithEmail(_email, _password);
                           }
                         },
                         child: Text('Login'),

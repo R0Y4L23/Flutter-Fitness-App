@@ -38,7 +38,10 @@ class _AgeAndNameSelectionState extends State<AgeAndNameSelection> {
             padding: EdgeInsets.symmetric(horizontal: getWidth(0.2)),
             child: Text(
               "What Should We Call You?",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white),
               textAlign: TextAlign.center,
             ),
           ),
@@ -50,6 +53,7 @@ class _AgeAndNameSelectionState extends State<AgeAndNameSelection> {
                 EdgeInsets.symmetric(vertical: 10, horizontal: getWidth(0.2)),
             child: TextFormField(
               controller: c,
+              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Enter Your Name',
                 hintStyle: TextStyle(color: Colors.grey),
@@ -57,7 +61,7 @@ class _AgeAndNameSelectionState extends State<AgeAndNameSelection> {
                   borderSide: BorderSide(color: Colors.grey),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide: BorderSide(color: Colors.grey),
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey),
@@ -78,7 +82,10 @@ class _AgeAndNameSelectionState extends State<AgeAndNameSelection> {
             padding: EdgeInsets.symmetric(horizontal: getWidth(0.2)),
             child: Text(
               "How Old Are You?",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white),
               textAlign: TextAlign.center,
             ),
           ),
@@ -90,6 +97,7 @@ class _AgeAndNameSelectionState extends State<AgeAndNameSelection> {
                 EdgeInsets.symmetric(vertical: 10, horizontal: getWidth(0.2)),
             child: TextFormField(
               controller: c2,
+              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Enter Your Age',
                 hintStyle: TextStyle(color: Colors.grey),
@@ -97,7 +105,7 @@ class _AgeAndNameSelectionState extends State<AgeAndNameSelection> {
                   borderSide: BorderSide(color: Colors.grey),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide: BorderSide(color: Colors.grey),
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey),
@@ -133,7 +141,7 @@ class _AgeAndNameSelectionState extends State<AgeAndNameSelection> {
               ),
             ),
             style: TextButton.styleFrom(
-              backgroundColor: Colors.purple,
+              backgroundColor: Colors.grey.shade700,
               padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),

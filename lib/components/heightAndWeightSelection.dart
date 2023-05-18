@@ -35,7 +35,8 @@ class _HeightAndWeightSelectionState extends State<HeightAndWeightSelection> {
         padding: EdgeInsets.symmetric(horizontal: getWidth(0.2)),
         child: Text(
           "Almost There...",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white),
           textAlign: TextAlign.center,
         ),
       ),
@@ -44,7 +45,7 @@ class _HeightAndWeightSelectionState extends State<HeightAndWeightSelection> {
       ),
       Container(
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Colors.grey.shade900,
             borderRadius: BorderRadius.circular(10.0),
           ),
           padding: EdgeInsets.all(16.0),
@@ -109,7 +110,7 @@ class _HeightAndWeightSelectionState extends State<HeightAndWeightSelection> {
           )),
       Container(
           decoration: BoxDecoration(
-            color: Colors.orange,
+            color: const Color.fromARGB(255, 52, 52, 52),
             borderRadius: BorderRadius.circular(10.0),
           ),
           padding: EdgeInsets.all(16.0),
@@ -187,7 +188,7 @@ class _HeightAndWeightSelectionState extends State<HeightAndWeightSelection> {
           ),
         ),
         style: TextButton.styleFrom(
-          backgroundColor: Colors.purple,
+          backgroundColor: Colors.grey.shade700,
           padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

@@ -29,7 +29,7 @@ class ProgressBar extends StatelessWidget {
           height: 5,
           width: getWidth(0.5),
           decoration: BoxDecoration(
-            color: Colors.grey.shade300,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Stack(
@@ -38,7 +38,7 @@ class ProgressBar extends StatelessWidget {
                 height: 5,
                 width: progress * MediaQuery.of(context).size.width * 0.5,
                 decoration: BoxDecoration(
-                  color: Colors.purple,
+                  color: Colors.grey.shade700,
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -48,7 +48,7 @@ class ProgressBar extends StatelessWidget {
         SizedBox(height: 10),
         Text(
           'Step $step/$total',
-          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.purple),
+          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
         ),
       ],
     );

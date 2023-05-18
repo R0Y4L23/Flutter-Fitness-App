@@ -53,7 +53,7 @@ class DrawerComponent extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
                   Text(
-                    "+91 9748094991",
+                    "View Profile",
                     style: TextStyle(
                         color: Colors.grey.shade700, letterSpacing: 2),
                   )
