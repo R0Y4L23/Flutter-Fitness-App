@@ -52,6 +52,7 @@ class _LoginState extends State<Login> {
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('userData', dbResponse.data.toString());
+        await prefs.setString('userName', dbResponse.data['name']);
 
         Navigator.pushReplacement(
           context,

@@ -8,6 +8,18 @@ class Header extends StatelessWidget {
   const Header({Key? key, required this.openTheDrawer, required this.name})
       : super(key: key);
 
+  String getGreeting() {
+    DateTime now = DateTime.now();
+    int currentHour = now.hour;
+    if (currentHour < 12) {
+      return "Good morning";
+    } else if (currentHour < 17) {
+      return "Good afternoon";
+    } else {
+      return "Good evening";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -51,7 +63,7 @@ class Header extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        "Good Morning",
+                        getGreeting(),
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 20),
                         textAlign: TextAlign.center,

@@ -6,7 +6,8 @@ import "package:flutter/material.dart";
 import "../connection/connect.dart";
 
 class DrawerComponent extends StatelessWidget {
-  const DrawerComponent({Key? key}) : super(key: key);
+  final String name;
+  const DrawerComponent({Key? key, required this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class DrawerComponent extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    "Subham Roy",
+                    name,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
                   Text(

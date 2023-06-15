@@ -22,15 +22,21 @@ class _DashboardState extends State<Dashboard> {
     _scaffoldKey.currentState?.openEndDrawer();
   }
 
-  String name = "User";
+  String name = "";
 
   Future<void> getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    print("The UD is");
-    print(prefs.getString('userData'));
-    // setState(() {
-    //   name = ud["name"];
-    // });
+    print("The username is");
+    print(prefs.getString('userName'));
+    try {
+      setState(() {
+        String username = prefs.getString('userName')!;
+        name = username;
+      });
+    } catch (e) {
+      print(e.toString());
+      name = "User";
+    }
   }
 
   @override
@@ -54,7 +60,9 @@ class _DashboardState extends State<Dashboard> {
 
     return Scaffold(
         key: _scaffoldKey,
-        endDrawer: DrawerComponent(),
+        endDrawer: DrawerComponent(
+          name: name,
+        ),
         body: SizedBox(
           height: getHeight(0.98),
           child: Stack(
@@ -94,7 +102,7 @@ class _DashboardState extends State<Dashboard> {
                             Column(
                               children: [
                                 Text(
-                                  "Total Calories",
+                                  "Target Calories",
                                   style: TextStyle(
                                       color: Colors.grey, letterSpacing: 1.5),
                                 ),
@@ -152,7 +160,7 @@ class _DashboardState extends State<Dashboard> {
                             Column(
                               children: [
                                 Text(
-                                  "Total Steps",
+                                  "Target Steps",
                                   style: TextStyle(
                                       color: Colors.grey, letterSpacing: 1.5),
                                 ),

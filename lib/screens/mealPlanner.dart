@@ -2,6 +2,7 @@
 
 import 'package:fitness_app/components/drawerComponent.dart';
 import "package:flutter/material.dart";
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/bottomNavbar.dart';
 import '../components/header.dart';
@@ -20,6 +21,26 @@ class _MealPlannerState extends State<MealPlanner> {
     _scaffoldKey.currentState?.openEndDrawer();
   }
 
+  String name = "";
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      setState(() {
+        String username = prefs.getString('userName')!;
+        name = username;
+      });
+    } catch (e) {
+      name = "User";
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -35,7 +56,9 @@ class _MealPlannerState extends State<MealPlanner> {
 
     return Scaffold(
         key: _scaffoldKey,
-        endDrawer: DrawerComponent(),
+        endDrawer: DrawerComponent(
+          name: name,
+        ),
         body: SizedBox(
           height: getHeight(0.98),
           child: Stack(
@@ -47,7 +70,7 @@ class _MealPlannerState extends State<MealPlanner> {
                     children: [
                       Header(
                         openTheDrawer: openTheDrawer,
-                        name: '',
+                        name: name,
                       ),
                       SizedBox(
                         height: getHeight(0.05),
