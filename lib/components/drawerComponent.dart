@@ -1,8 +1,10 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, unused_element, unused_import, empty_catches, unused_local_variable, avoid_print, use_build_context_synchronously
 
 import 'package:fitness_app/screens/auth.dart';
+import "package:fitness_app/screens/bmiScreen.dart";
 import "package:fitness_app/screens/login.dart";
 import "package:flutter/material.dart";
+import "package:shared_preferences/shared_preferences.dart";
 import "../connection/connect.dart";
 
 class DrawerComponent extends StatelessWidget {
@@ -26,6 +28,8 @@ class DrawerComponent extends StatelessWidget {
       try {
         final response =
             await AppwriteService.account.deleteSession(sessionId: "current");
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.clear();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => Login()),
@@ -66,7 +70,12 @@ class DrawerComponent extends StatelessWidget {
             height: 50,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => BmiScreen()),
+              );
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

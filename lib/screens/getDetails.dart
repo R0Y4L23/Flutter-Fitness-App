@@ -111,6 +111,8 @@ class _GetDetailsState extends State<GetDetails> {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('userData', dbResponse.data.toString());
         await prefs.setString('userName', dbResponse.data['name']);
+        await prefs.setDouble('userWeight', dbResponse.data['weight']);
+        await prefs.setDouble('userHeight', dbResponse.data['height']);
 
         await AppwriteService.account.createEmailSession(
           email: email,
@@ -123,7 +125,7 @@ class _GetDetailsState extends State<GetDetails> {
         );
       } catch (e) {
         print(e.toString());
-        _showToast(context, "Email Or Password Is Wrong.");
+        _showToast(context, e.toString());
       }
     }
 

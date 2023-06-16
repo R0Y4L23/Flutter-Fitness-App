@@ -53,6 +53,10 @@ class _LoginState extends State<Login> {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('userData', dbResponse.data.toString());
         await prefs.setString('userName', dbResponse.data['name']);
+        await prefs.setDouble(
+            'userWeight', dbResponse.data['weight'].toDouble());
+        await prefs.setDouble(
+            'userHeight', dbResponse.data['height'].toDouble());
 
         Navigator.pushReplacement(
           context,
@@ -60,7 +64,7 @@ class _LoginState extends State<Login> {
         );
       } catch (e) {
         print(e.toString());
-        _showToast(context, "Email Or Password Is Wrong.");
+        _showToast(context, e.toString());
       }
     }
 
