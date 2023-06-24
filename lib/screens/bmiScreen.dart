@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_element, file_names
+// ignore_for_file: prefer_const_constructors, unused_element, file_names, prefer_const_literals_to_create_immutables, unnecessary_new, unnecessary_null_comparison
 
 import "package:flutter/material.dart";
 import "package:shared_preferences/shared_preferences.dart";
@@ -42,6 +42,12 @@ class _BmiScreenState extends State<BmiScreen> {
   late double weightOfPerson;
   double bmiCalculated = 0;
   String bmiCategory = "";
+
+  late double onTheSpotBmi = 0;
+  late String onTheSpotBmiCategory = "";
+
+  TextEditingController h = new TextEditingController();
+  TextEditingController w = new TextEditingController();
 
   Future<void> getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -107,7 +113,7 @@ class _BmiScreenState extends State<BmiScreen> {
                                 fontSize: 30, fontWeight: FontWeight.w700)),
                       ),
                       SizedBox(
-                        height: getHeight(0.05),
+                        height: getHeight(0.02),
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 25),
@@ -116,7 +122,86 @@ class _BmiScreenState extends State<BmiScreen> {
                                 fontSize: 30, fontWeight: FontWeight.w700)),
                       ),
                       SizedBox(
-                        height: getHeight(0.03),
+                        height: getHeight(0.06),
+                      ),
+                      Center(
+                        child: Text(
+                          "Calculate BMI",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                      SizedBox(
+                        height: getHeight(0.04),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextField(
+                                controller: h,
+                                decoration: InputDecoration(
+                                  labelText: 'Height (in CMs)',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextField(
+                                controller: w,
+                                decoration: InputDecoration(
+                                  labelText: 'Weight (in KGs)',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Center(
+                        child: SizedBox(
+                          height: 50.0,
+                          width: 150.0,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                onTheSpotBmi = calculateBMI(
+                                    double.parse(w.text),
+                                    double.parse(h.text) / 100);
+                                onTheSpotBmiCategory =
+                                    getBMICategory(onTheSpotBmi);
+                              });
+                            },
+                            child: Text(
+                              'CALCULATE',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: getHeight(0.05),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 25),
+                        child: Text("The BMI is $onTheSpotBmi",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w700)),
+                      ),
+                      SizedBox(
+                        height: getHeight(0.02),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 25),
+                        child: Text("The BMI Category is $onTheSpotBmiCategory",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w700)),
                       ),
                     ],
                   ),
