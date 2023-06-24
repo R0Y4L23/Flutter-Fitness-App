@@ -147,7 +147,7 @@ class _AboutUsState extends State<AboutUs> {
                   ),
                 ),
               ),
-              BottomNavbar(indexOfThisScreen: 1)
+              BottomNavbar(indexOfThisScreen: 2)
             ],
           ),
         ));
