@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, unused_element
 
 import 'package:fitness_app/screens/mealPlanner.dart';
+import 'package:fitness_app/screens/nutrientsChart.dart';
 import "package:flutter/material.dart";
 
 import '../screens/dashboard.dart';
@@ -49,17 +50,22 @@ class BottomNavbar extends StatelessWidget {
                   ),
                 ],
                 onTap: (index) {
-                  if (index == 0) {
+                  if (index == 0 && indexOfThisScreen != 0) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Dashboard()),
                     );
-                  } else if (index == 1) {
+                  } else if (index == 1 && indexOfThisScreen != 1) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => MealPlanner()),
                     );
-                  } else if (index == 2) {}
+                  } else if (index == 2 && indexOfThisScreen != 2) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NutrientChart()),
+                    );
+                  }
                 },
                 backgroundColor: Colors.blue.shade100,
               ),

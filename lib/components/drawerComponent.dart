@@ -1,8 +1,12 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, unused_element, unused_import, empty_catches, unused_local_variable, avoid_print, use_build_context_synchronously
 
+import "package:fitness_app/screens/aboutUs.dart";
 import 'package:fitness_app/screens/auth.dart';
 import "package:fitness_app/screens/bmiScreen.dart";
+import "package:fitness_app/screens/contactUs.dart";
 import "package:fitness_app/screens/login.dart";
+import "package:fitness_app/screens/profile.dart";
+import "package:fitness_app/screens/settings.dart";
 import "package:flutter/material.dart";
 import "package:shared_preferences/shared_preferences.dart";
 import "../connection/connect.dart";
@@ -57,10 +61,18 @@ class DrawerComponent extends StatelessWidget {
                     name,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
-                  Text(
-                    "View Profile",
-                    style: TextStyle(
-                        color: Colors.grey.shade700, letterSpacing: 2),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => Profile()),
+                      );
+                    },
+                    child: Text(
+                      "View Profile",
+                      style: TextStyle(
+                          color: Colors.grey.shade700, letterSpacing: 2),
+                    ),
                   )
                 ],
               )
@@ -98,7 +110,12 @@ class DrawerComponent extends StatelessWidget {
             height: 30,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Settings()),
+              );
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,7 +138,12 @@ class DrawerComponent extends StatelessWidget {
             height: 30,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => AboutUs()),
+              );
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -144,7 +166,12 @@ class DrawerComponent extends StatelessWidget {
             height: 30,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ContactUs()),
+              );
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

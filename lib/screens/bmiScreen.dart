@@ -44,7 +44,7 @@ class _BmiScreenState extends State<BmiScreen> {
   String bmiCategory = "";
 
   late double onTheSpotBmi = 0;
-  late String onTheSpotBmiCategory = "";
+  late String onTheSpotBmiCategory = "null";
 
   TextEditingController h = new TextEditingController();
   TextEditingController w = new TextEditingController();
