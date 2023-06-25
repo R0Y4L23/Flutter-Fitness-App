@@ -119,9 +119,9 @@ class _GetDetailsState extends State<GetDetails> {
           password: password,
         );
 
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Dashboard()),
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => Dashboard()),
+          (Route<dynamic> route) => false,
         );
       } catch (e) {
         print(e.toString());

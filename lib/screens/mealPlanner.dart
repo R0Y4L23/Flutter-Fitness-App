@@ -186,14 +186,17 @@ class _MealPlannerState extends State<MealPlanner> {
                                     MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  CachedNetworkImage(
-                                    imageUrl: image,
-                                    height: 75,
-                                    width: 75,
-                                    placeholder: (context, url) =>
-                                        CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
+                                  ClipRRect(
+                                    child: CachedNetworkImage(
+                                      imageUrl: image,
+                                      height: 75,
+                                      width: 75,
+                                      placeholder: (context, url) =>
+                                          CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                   Text(
                                     label,
@@ -202,6 +205,7 @@ class _MealPlannerState extends State<MealPlanner> {
                                   IconButton(
                                       onPressed: () {
                                         addToFoodList();
+                                        Navigator.of(context).pop();
                                       },
                                       icon: Icon(
                                         Icons.add_box,
@@ -239,21 +243,25 @@ class _MealPlannerState extends State<MealPlanner> {
                       TextButton(
                           onPressed: () {
                             addToBreakfastList(id);
+                            Navigator.of(context).pop();
                           },
                           child: Text("Breakfast")),
                       TextButton(
                           onPressed: () {
                             addToLunchList(id);
+                            Navigator.of(context).pop();
                           },
                           child: Text("Lunch")),
                       TextButton(
                           onPressed: () {
                             addToSnacksList(id);
+                            Navigator.of(context).pop();
                           },
                           child: Text("Snacks")),
                       TextButton(
                           onPressed: () {
                             addToDinnerList(id);
+                            Navigator.of(context).pop();
                           },
                           child: Text("Dinner"))
                     ],
@@ -334,7 +342,7 @@ class _MealPlannerState extends State<MealPlanner> {
                                   for (int i = 0; i < allFoods.length; i++)
                                     GestureDetector(
                                       child: Container(
-                                        width: getWidth(0.3),
+                                        width: getWidth(0.25),
                                         height: getHeight(0.12),
                                         margin: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
@@ -346,10 +354,14 @@ class _MealPlannerState extends State<MealPlanner> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Image.network(
-                                                  allFoods[i]["image"]!,
-                                                  height: 60,
-                                                  width: 60),
+                                              ClipRRect(
+                                                child: Image.network(
+                                                    allFoods[i]["image"]!,
+                                                    height: 60,
+                                                    width: 60),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
                                               SizedBox(height: 10),
                                               Text(
                                                 allFoods[i]["label"]!,
@@ -416,7 +428,7 @@ class _MealPlannerState extends State<MealPlanner> {
                                   for (int i = 0; i < breakfast.length; i++)
                                     Stack(children: [
                                       Container(
-                                        width: getWidth(0.3),
+                                        width: getWidth(0.25),
                                         height: getHeight(0.12),
                                         margin: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
@@ -424,27 +436,60 @@ class _MealPlannerState extends State<MealPlanner> {
                                               BorderRadius.circular(10),
                                           color: Colors.green.shade100,
                                         ),
-                                        child: Column(children: [
-                                          Image.network(breakfast[i]["image"]!,
-                                              height: 60, width: 60),
-                                          Text(
-                                            breakfast[i]["label"]!,
-                                            style:
-                                                TextStyle(color: Colors.orange),
-                                          )
-                                        ]),
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              ClipRRect(
+                                                child: Image.network(
+                                                    breakfast[i]["image"]!,
+                                                    height: 60,
+                                                    width: 60),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                breakfast[i]["label"]!,
+                                                style: TextStyle(
+                                                    color: Colors.orange),
+                                              )
+                                            ]),
                                       ),
                                       Positioned(
-                                          right: 0,
+                                          right: -10,
                                           top: -10,
                                           child: IconButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                setState(() {
+                                                  breakfast.removeWhere(
+                                                      (element) =>
+                                                          element["foodId"] ==
+                                                          breakfast[i]
+                                                              ["foodId"]);
+                                                });
+                                              },
                                               icon: Icon(
                                                 Icons.delete,
                                                 color: Colors.red,
                                                 size: 35,
                                               )))
                                     ]),
+                                  breakfast.isEmpty
+                                      ? SizedBox(
+                                          width: getWidth(0.9),
+                                          child: Center(
+                                            child: Text(
+                                              "No Breakfast Meal Added",
+                                              style: TextStyle(
+                                                  color: Colors.green.shade900,
+                                                  fontSize: 18),
+                                            ),
+                                          ),
+                                        )
+                                      : SizedBox()
                                 ],
                               )),
                         ),
@@ -479,7 +524,7 @@ class _MealPlannerState extends State<MealPlanner> {
                                   for (int i = 0; i < lunch.length; i++)
                                     Stack(children: [
                                       Container(
-                                        width: getWidth(0.3),
+                                        width: getWidth(0.25),
                                         height: getHeight(0.12),
                                         margin: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
@@ -487,27 +532,56 @@ class _MealPlannerState extends State<MealPlanner> {
                                               BorderRadius.circular(10),
                                           color: Colors.red.shade100,
                                         ),
-                                        child: Column(children: [
-                                          Image.network(lunch[i]["image"]!,
-                                              height: 60, width: 60),
-                                          Text(
-                                            lunch[i]["label"]!,
-                                            style:
-                                                TextStyle(color: Colors.orange),
-                                          )
-                                        ]),
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              ClipRRect(
+                                                child: Image.network(
+                                                    lunch[i]["image"]!,
+                                                    height: 60,
+                                                    width: 60),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                lunch[i]["label"]!,
+                                                style: TextStyle(
+                                                    color: Colors.orange),
+                                              )
+                                            ]),
                                       ),
                                       Positioned(
-                                          right: 0,
+                                          right: -10,
                                           top: -10,
                                           child: IconButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                setState(() {
+                                                  lunch.removeWhere((element) =>
+                                                      element["foodId"] ==
+                                                      lunch[i]["foodId"]);
+                                                });
+                                              },
                                               icon: Icon(
                                                 Icons.delete,
                                                 color: Colors.red,
                                                 size: 35,
                                               )))
                                     ]),
+                                  lunch.isEmpty
+                                      ? SizedBox(
+                                          width: getWidth(0.9),
+                                          child: Center(
+                                            child: Text(
+                                              "No Lunch Meal Added",
+                                              style: TextStyle(
+                                                  color: Colors.red.shade900,
+                                                  fontSize: 18),
+                                            ),
+                                          ),
+                                        )
+                                      : SizedBox()
                                 ],
                               )),
                         ),
@@ -542,7 +616,7 @@ class _MealPlannerState extends State<MealPlanner> {
                                   for (int i = 0; i < snack.length; i++)
                                     Stack(children: [
                                       Container(
-                                        width: getWidth(0.3),
+                                        width: getWidth(0.25),
                                         height: getHeight(0.12),
                                         margin: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
@@ -550,27 +624,58 @@ class _MealPlannerState extends State<MealPlanner> {
                                               BorderRadius.circular(10),
                                           color: Colors.purple.shade100,
                                         ),
-                                        child: Column(children: [
-                                          Image.network(snack[i]["image"]!,
-                                              height: 60, width: 60),
-                                          Text(
-                                            snack[i]["label"]!,
-                                            style:
-                                                TextStyle(color: Colors.orange),
-                                          )
-                                        ]),
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              ClipRRect(
+                                                child: Image.network(
+                                                    snack[i]["image"]!,
+                                                    height: 60,
+                                                    width: 60),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                snack[i]["label"]!,
+                                                style: TextStyle(
+                                                    color: Colors.orange),
+                                              )
+                                            ]),
                                       ),
                                       Positioned(
-                                          right: 0,
+                                          right: -10,
                                           top: -10,
                                           child: IconButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                setState(() {
+                                                  snack.removeWhere((element) =>
+                                                      element["foodId"] ==
+                                                      snack[i]["foodId"]);
+                                                });
+                                              },
                                               icon: Icon(
                                                 Icons.delete,
                                                 color: Colors.red,
                                                 size: 35,
                                               )))
                                     ]),
+                                  snack.isEmpty
+                                      ? SizedBox(
+                                          width: getWidth(0.9),
+                                          child: Center(
+                                            child: Text(
+                                              "No Snack Meal Added",
+                                              style: TextStyle(
+                                                  color: Colors.purple.shade900,
+                                                  fontSize: 18),
+                                            ),
+                                          ),
+                                        )
+                                      : SizedBox()
                                 ],
                               )),
                         ),
@@ -605,7 +710,7 @@ class _MealPlannerState extends State<MealPlanner> {
                                   for (int i = 0; i < dinner.length; i++)
                                     Stack(children: [
                                       Container(
-                                        width: getWidth(0.3),
+                                        width: getWidth(0.25),
                                         height: getHeight(0.12),
                                         margin: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
@@ -613,27 +718,59 @@ class _MealPlannerState extends State<MealPlanner> {
                                               BorderRadius.circular(10),
                                           color: Colors.cyan.shade100,
                                         ),
-                                        child: Column(children: [
-                                          Image.network(dinner[i]["image"]!,
-                                              height: 60, width: 60),
-                                          Text(
-                                            dinner[i]["label"]!,
-                                            style:
-                                                TextStyle(color: Colors.orange),
-                                          )
-                                        ]),
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              ClipRRect(
+                                                child: Image.network(
+                                                    dinner[i]["image"]!,
+                                                    height: 60,
+                                                    width: 60),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                dinner[i]["label"]!,
+                                                style: TextStyle(
+                                                    color: Colors.orange),
+                                              )
+                                            ]),
                                       ),
                                       Positioned(
-                                          right: 0,
+                                          right: -10,
                                           top: -10,
                                           child: IconButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                setState(() {
+                                                  dinner.removeWhere(
+                                                      (element) =>
+                                                          element["foodId"] ==
+                                                          dinner[i]["foodId"]);
+                                                });
+                                              },
                                               icon: Icon(
                                                 Icons.delete,
                                                 color: Colors.red,
                                                 size: 35,
                                               )))
                                     ]),
+                                  dinner.isEmpty
+                                      ? SizedBox(
+                                          width: getWidth(0.9),
+                                          child: Center(
+                                            child: Text(
+                                              "No Dinner Meal Added",
+                                              style: TextStyle(
+                                                  color: Colors.cyan.shade900,
+                                                  fontSize: 18),
+                                            ),
+                                          ),
+                                        )
+                                      : SizedBox()
                                 ],
                               )),
                         ),

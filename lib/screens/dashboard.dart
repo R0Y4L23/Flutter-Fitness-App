@@ -200,6 +200,315 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ],
                         ),
+                      ),
+                      SizedBox(
+                        height: getHeight(0.035),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 25),
+                        child: Text("Weekly Goals",
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.w700)),
+                      ),
+                      SizedBox(
+                        height: getHeight(0.03),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 12),
+                                padding: EdgeInsets.all(10),
+                                height: 120,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    color: Colors.purple.shade200,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "SUNDAY",
+                                      style: TextStyle(
+                                          fontSize: 16, letterSpacing: 3),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/footsteps.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/calories.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 12),
+                                padding: EdgeInsets.all(10),
+                                height: 120,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    color: Colors.indigo.shade200,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "MONDAY",
+                                      style: TextStyle(
+                                          fontSize: 16, letterSpacing: 3),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/footsteps.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/calories.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 12),
+                                padding: EdgeInsets.all(10),
+                                height: 120,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    color: Colors.teal.shade200,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "TUESDAY",
+                                      style: TextStyle(
+                                          fontSize: 16, letterSpacing: 3),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/footsteps.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/calories.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 12),
+                                padding: EdgeInsets.all(10),
+                                height: 120,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    color: Colors.lightGreen.shade200,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "WEDNESDAY",
+                                      style: TextStyle(
+                                          fontSize: 16, letterSpacing: 3),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/footsteps.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/calories.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 12),
+                                padding: EdgeInsets.all(10),
+                                height: 120,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    color: Colors.pink.shade200,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "THURSDAY",
+                                      style: TextStyle(
+                                          fontSize: 16, letterSpacing: 3),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/footsteps.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/calories.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 12),
+                                padding: EdgeInsets.all(10),
+                                height: 120,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    color: Colors.amber.shade200,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "FRIDAY",
+                                      style: TextStyle(
+                                          fontSize: 16, letterSpacing: 3),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/footsteps.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/calories.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 12),
+                                padding: EdgeInsets.all(10),
+                                height: 120,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    color: Colors.orange.shade200,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "SATURDAY",
+                                      style: TextStyle(
+                                          fontSize: 16, letterSpacing: 3),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/footsteps.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/calories.png",
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                        Text(" :  500")
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       )
                     ],
                   ),

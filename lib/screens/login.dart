@@ -58,9 +58,9 @@ class _LoginState extends State<Login> {
         await prefs.setDouble(
             'userHeight', dbResponse.data['height'].toDouble());
 
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Dashboard()),
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => Dashboard()),
+          (Route<dynamic> route) => false,
         );
       } catch (e) {
         print(e.toString());

@@ -211,6 +211,9 @@ class _ContactUsState extends State<ContactUs> {
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w500)),
                       ),
+                      SizedBox(
+                        height: getHeight(0.1),
+                      ),
                     ],
                   ),
                 ),
