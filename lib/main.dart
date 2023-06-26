@@ -19,6 +19,13 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getInt("steps") == null) {
+      prefs.setInt("steps", 8000);
+    }
+    if (prefs.getInt("calories") == null) {
+      prefs.setInt("calories", 800);
+    }
+
     try {
       setState(() {
         String username = prefs.getString('userName')!;

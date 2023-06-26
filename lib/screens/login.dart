@@ -51,6 +51,7 @@ class _LoginState extends State<Login> {
             documentId: response.userId);
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString("userID", response.userId.toString());
         await prefs.setString('userData', dbResponse.data.toString());
         await prefs.setString('userName', dbResponse.data['name']);
         await prefs.setDouble(

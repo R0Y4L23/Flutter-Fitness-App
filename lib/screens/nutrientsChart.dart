@@ -269,13 +269,20 @@ class _NutrientChartState extends State<NutrientChart> {
                         child: Row(
                           children: [
                             Expanded(
+                                child: Container(
+                              height: getHeight(0.06),
+                              padding: EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(4.0),
+                              ),
                               child: TextField(
                                 controller: _textEditingController,
-                                decoration: InputDecoration(
+                                decoration: InputDecoration.collapsed(
                                   hintText: 'Enter a food or recipe',
                                 ),
                               ),
-                            ),
+                            )),
                             SizedBox(width: 10),
                             ElevatedButton(
                               onPressed: searchRecipe,

@@ -6,9 +6,13 @@ class TextFieldWithIcon extends StatelessWidget {
   final IconData icon;
   final String label;
   final String placeholder;
+  final TextEditingController tec;
 
   TextFieldWithIcon(
-      {required this.icon, required this.label, required this.placeholder});
+      {required this.icon,
+      required this.label,
+      required this.placeholder,
+      required this.tec});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +42,7 @@ class TextFieldWithIcon extends StatelessWidget {
                   SizedBox(width: 8.0),
                   Expanded(
                     child: TextFormField(
+                      controller: tec,
                       decoration: InputDecoration.collapsed(
                         hintText: placeholder,
                       ),

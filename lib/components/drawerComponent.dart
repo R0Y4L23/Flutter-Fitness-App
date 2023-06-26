@@ -34,9 +34,9 @@ class DrawerComponent extends StatelessWidget {
             await AppwriteService.account.deleteSession(sessionId: "current");
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.clear();
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Login()),
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => Auth()),
+          (Route<dynamic> route) => false,
         );
       } catch (e) {
         print('Error deleting session: ${e.toString()}');

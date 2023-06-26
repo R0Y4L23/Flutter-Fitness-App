@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_element, prefer_const_constructors_in_immutables, file_names, unused_local_variable
+// ignore_for_file: unused_local_variable, prefer_const_constructors_in_immutables, file_names, unused_element
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,14 +61,14 @@ class _ContactUsState extends State<ContactUs> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Success'),
-          content: Text('Your message has been submitted successfully.'),
+          title: const Text('Success'),
+          content: const Text('Your message has been submitted successfully.'),
           actions: [
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -96,131 +96,156 @@ class _ContactUsState extends State<ContactUs> {
     }
 
     return Scaffold(
-        key: _scaffoldKey,
-        endDrawer: DrawerComponent(
-          name: name,
-        ),
-        body: SizedBox(
-          height: getHeight(0.98),
-          child: Stack(
-            children: [
-              Positioned(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Header(
-                        openTheDrawer: openTheDrawer,
-                        name: name,
+      key: _scaffoldKey,
+      endDrawer: DrawerComponent(
+        name: name,
+      ),
+      body: SizedBox(
+        height: getHeight(0.98),
+        child: Stack(
+          children: [
+            Positioned(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Header(
+                      openTheDrawer: openTheDrawer,
+                      name: name,
+                    ),
+                    SizedBox(
+                      height: getHeight(0.05),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 25),
+                      child: Text(
+                        "Contact Us",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(
-                        height: getHeight(0.05),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 25),
-                        child: Text("Contact Us",
-                            style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.w700)),
-                      ),
-                      SizedBox(
-                        height: getHeight(0.03),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              TextFormField(
-                                controller: _nameController,
-                                decoration: InputDecoration(labelText: 'Name'),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your name';
-                                  }
-                                  return null;
-                                },
+                    ),
+                    SizedBox(
+                      height: getHeight(0.03),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            TextFormField(
+                              controller: _nameController,
+                              decoration: const InputDecoration(
+                                labelText: 'Name',
+                                border: OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 12.0, horizontal: 16.0),
                               ),
-                              SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _emailController,
-                                decoration: InputDecoration(labelText: 'Email'),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your email';
-                                  }
-                                  // You can add additional email validation logic here
-                                  return null;
-                                },
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter your name';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16.0),
+                            TextFormField(
+                              controller: _emailController,
+                              decoration: const InputDecoration(
+                                labelText: 'Email',
+                                border: OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 12.0, horizontal: 16.0),
                               ),
-                              SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _subjectController,
-                                decoration:
-                                    InputDecoration(labelText: 'Subject'),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter the subject';
-                                  }
-                                  return null;
-                                },
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                // You can add additional email validation logic here
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16.0),
+                            TextFormField(
+                              controller: _subjectController,
+                              decoration: const InputDecoration(
+                                labelText: 'Subject',
+                                border: OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 12.0, horizontal: 16.0),
                               ),
-                              SizedBox(height: 16.0),
-                              TextFormField(
-                                controller: _messageController,
-                                decoration:
-                                    InputDecoration(labelText: 'Message'),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your message';
-                                  }
-                                  return null;
-                                },
-                                maxLines: 4,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter the subject';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16.0),
+                            TextFormField(
+                              controller: _messageController,
+                              decoration: const InputDecoration(
+                                labelText: 'Message',
+                                border: OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 12.0, horizontal: 16.0),
                               ),
-                              SizedBox(height: 16.0),
-                              ElevatedButton(
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    // Perform submission logic
-                                    _submitForm();
-                                  }
-                                },
-                                child: Text('Submit'),
-                              ),
-                            ],
-                          ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter your message';
+                                }
+                                return null;
+                              },
+                              maxLines: 4,
+                            ),
+                            const SizedBox(height: 16.0),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  // Perform submission logic
+                                  _submitForm();
+                                }
+                              },
+                              child: const Text('Submit'),
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: getHeight(0.05),
+                    ),
+                    SizedBox(
+                      height: getHeight(0.05),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 25),
+                      child: Text(
+                        "Our Email",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w700),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 25),
-                        child: Text("Our Email",
-                            style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.w700)),
+                    ),
+                    SizedBox(
+                      height: getHeight(0.02),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 25),
+                      child: Text(
+                        "Test@gmail.com",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
-                        height: getHeight(0.02),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 25),
-                        child: Text("Test@gmail.com",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500)),
-                      ),
-                      SizedBox(
-                        height: getHeight(0.1),
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: getHeight(0.1),
+                    ),
+                  ],
                 ),
               ),
-              BottomNavbar(indexOfThisScreen: 1)
-            ],
-          ),
-        ));
+            ),
+            const BottomNavbar(indexOfThisScreen: 1),
+          ],
+        ),
+      ),
+    );
   }
 }

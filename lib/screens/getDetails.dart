@@ -109,6 +109,7 @@ class _GetDetailsState extends State<GetDetails> {
             documentId: uid);
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString("userID", uid);
         await prefs.setString('userData', dbResponse.data.toString());
         await prefs.setString('userName', dbResponse.data['name']);
         await prefs.setDouble('userWeight', dbResponse.data['weight']);

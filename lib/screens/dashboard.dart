@@ -23,11 +23,16 @@ class _DashboardState extends State<Dashboard> {
   }
 
   String name = "";
+  int targetCal = 0;
+  int targetSteps = 0;
 
   Future<void> getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    print("The username is");
-    print(prefs.getString('userName'));
+    targetCal = prefs.getInt("calories") ?? 800;
+    targetSteps = prefs.getInt("steps") ?? 8000;
+
+    print(prefs.getString('userID'));
+
     try {
       setState(() {
         String username = prefs.getString('userName')!;
@@ -110,7 +115,7 @@ class _DashboardState extends State<Dashboard> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "800 Cals",
+                                  "$targetCal Cals",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
@@ -168,7 +173,7 @@ class _DashboardState extends State<Dashboard> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "8000",
+                                  targetSteps.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
@@ -232,7 +237,9 @@ class _DashboardState extends State<Dashboard> {
                                     Text(
                                       "SUNDAY",
                                       style: TextStyle(
-                                          fontSize: 16, letterSpacing: 3),
+                                          fontSize: 16,
+                                          letterSpacing: 3,
+                                          fontWeight: FontWeight.w900),
                                     ),
                                     SizedBox(
                                       height: 10,
@@ -273,7 +280,9 @@ class _DashboardState extends State<Dashboard> {
                                     Text(
                                       "MONDAY",
                                       style: TextStyle(
-                                          fontSize: 16, letterSpacing: 3),
+                                          fontSize: 16,
+                                          letterSpacing: 3,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
                                       height: 10,
@@ -314,7 +323,9 @@ class _DashboardState extends State<Dashboard> {
                                     Text(
                                       "TUESDAY",
                                       style: TextStyle(
-                                          fontSize: 16, letterSpacing: 3),
+                                          fontSize: 16,
+                                          letterSpacing: 3,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
                                       height: 10,
@@ -355,7 +366,9 @@ class _DashboardState extends State<Dashboard> {
                                     Text(
                                       "WEDNESDAY",
                                       style: TextStyle(
-                                          fontSize: 16, letterSpacing: 3),
+                                          fontSize: 16,
+                                          letterSpacing: 3,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
                                       height: 10,
@@ -396,7 +409,9 @@ class _DashboardState extends State<Dashboard> {
                                     Text(
                                       "THURSDAY",
                                       style: TextStyle(
-                                          fontSize: 16, letterSpacing: 3),
+                                          fontSize: 16,
+                                          letterSpacing: 3,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
                                       height: 10,
@@ -437,7 +452,9 @@ class _DashboardState extends State<Dashboard> {
                                     Text(
                                       "FRIDAY",
                                       style: TextStyle(
-                                          fontSize: 16, letterSpacing: 3),
+                                          fontSize: 16,
+                                          letterSpacing: 3,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
                                       height: 10,
@@ -478,7 +495,9 @@ class _DashboardState extends State<Dashboard> {
                                     Text(
                                       "SATURDAY",
                                       style: TextStyle(
-                                          fontSize: 16, letterSpacing: 3),
+                                          fontSize: 16,
+                                          letterSpacing: 3,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
                                       height: 10,
