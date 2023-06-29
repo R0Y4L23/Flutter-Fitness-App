@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, unused_element, prefer_const_literals_to_create_immutables, prefer_interpolation_to_compose_strings, avoid_print, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, unused_element, prefer_const_literals_to_create_immutables, prefer_interpolation_to_compose_strings, avoid_print, use_build_context_synchronously, unnecessary_new
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,6 +34,10 @@ class _ProfileState extends State<Profile> {
   late TextEditingController caloriesController;
   late TextEditingController stepsController;
 
+  TextEditingController passwordController = new TextEditingController();
+
+  String originalPhoneNumber = "";
+
   bool isLoadingComplete = false;
 
   Future<void> getUserData() async {
@@ -68,6 +72,8 @@ class _ProfileState extends State<Profile> {
 
         caloriesController.text = prefs.getInt("calories").toString();
         stepsController.text = prefs.getInt("steps").toString();
+
+        originalPhoneNumber = accResponse.phone;
       });
     } catch (e) {
       name = "User";
@@ -99,8 +105,49 @@ class _ProfileState extends State<Profile> {
     prefs.setInt("steps", int.parse(stepsController.text));
   }
 
+  void _showFloatingModal(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Verify Password To Update Phone Number'),
+            content: SizedBox(
+              height: 100,
+              child: TextFieldWithIcon(
+                icon: Icons.password,
+                label: 'Password',
+                placeholder: 'Type here',
+                tec: passwordController,
+              ),
+            ),
+            actions: [
+              TextButton(
+                child: Text('Verify'),
+                onPressed: () async {
+                  try {
+                    await AppwriteService.account.updatePhone(
+                        phone: "+91" + phoneController.text,
+                        password: passwordController.text);
+                    Navigator.of(context).pop();
+                  } catch (e) {
+                    _showToast(context,
+                        "Something Went Wrong While Updating Phone Number");
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   void updateUserData(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (phoneController.text.isNotEmpty &&
+        phoneController.text != originalPhoneNumber) {
+      _showFloatingModal(context);
+    }
 
     await AppwriteService.account.updateName(name: nameController.text);
 

@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, unused_element, unused_import, empty_catches, unused_local_variable, avoid_print, use_build_context_synchronously
 
+import "package:awesome_notifications/awesome_notifications.dart";
 import "package:fitness_app/screens/aboutUs.dart";
 import 'package:fitness_app/screens/auth.dart';
 import "package:fitness_app/screens/bmiScreen.dart";

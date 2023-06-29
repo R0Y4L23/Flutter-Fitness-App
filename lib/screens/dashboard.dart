@@ -1,12 +1,14 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_element, avoid_unnecessary_containers, unused_local_variable, avoid_print, unused_import
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_element, avoid_unnecessary_containers, unused_local_variable, avoid_print, unused_import, unused_field, prefer_interpolation_to_compose_strings, await_only_futures
 
 import 'dart:convert';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:fitness_app/components/bottomNavbar.dart';
 import 'package:fitness_app/components/drawerComponent.dart';
 import 'package:fitness_app/components/header.dart';
 import "package:flutter/material.dart";
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pedometer/pedometer.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key? key}) : super(key: key);
@@ -44,10 +46,70 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
+  late Stream<StepCount> _stepCountStream;
+  late Stream<PedestrianStatus> _pedestrianStatusStream;
+  String _status = '?', _steps = '0';
+
+  void onStepCount(StepCount event) {
+    print("Step Count");
+    print(event);
+    setState(() {
+      _steps = event.steps.toString();
+    });
+  }
+
+  void onPedestrianStatusChanged(PedestrianStatus event) {
+    print("Status Changed");
+    print(event);
+    setState(() {
+      _status = event.status;
+    });
+
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      } else {
+        AwesomeNotifications().createNotification(
+            content: NotificationContent(
+                id: 10,
+                channelKey: 'basic_channel',
+                title: 'Status',
+                body: 'Now ' + _status,
+                actionType: ActionType.Default));
+      }
+    });
+  }
+
+  void onPedestrianStatusError(error) {
+    print('onPedestrianStatusError: $error');
+    setState(() {
+      _status = 'Pedestrian Status not available';
+    });
+    print(_status);
+  }
+
+  void onStepCountError(error) {
+    print('onStepCountError: $error');
+    setState(() {
+      _steps = 'Step Count not available';
+    });
+  }
+
+  Future<void> initPlatformState() async {
+    print("Pedometer is formed");
+    _pedestrianStatusStream = await Pedometer.pedestrianStatusStream;
+    _stepCountStream = await Pedometer.stepCountStream;
+    _stepCountStream.listen(onStepCount).onError(onStepCountError);
+    _pedestrianStatusStream
+        .listen(onPedestrianStatusChanged)
+        .onError(onPedestrianStatusError);
+  }
+
   @override
   void initState() {
     super.initState();
     getUserData();
+    initPlatformState();
   }
 
   @override
@@ -138,7 +200,7 @@ class _DashboardState extends State<Dashboard> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "800 Cals",
+                                  "${(double.parse(_steps) * 0.05).toStringAsFixed(2)} Cals",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
@@ -196,7 +258,7 @@ class _DashboardState extends State<Dashboard> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "2000",
+                                  _steps,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
@@ -238,7 +300,7 @@ class _DashboardState extends State<Dashboard> {
                                       "SUNDAY",
                                       style: TextStyle(
                                           fontSize: 16,
-                                          letterSpacing: 3,
+                                          letterSpacing: 3.5,
                                           fontWeight: FontWeight.w900),
                                     ),
                                     SizedBox(
@@ -281,7 +343,7 @@ class _DashboardState extends State<Dashboard> {
                                       "MONDAY",
                                       style: TextStyle(
                                           fontSize: 16,
-                                          letterSpacing: 3,
+                                          letterSpacing: 3.5,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
@@ -324,7 +386,7 @@ class _DashboardState extends State<Dashboard> {
                                       "TUESDAY",
                                       style: TextStyle(
                                           fontSize: 16,
-                                          letterSpacing: 3,
+                                          letterSpacing: 3.5,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
@@ -367,7 +429,7 @@ class _DashboardState extends State<Dashboard> {
                                       "WEDNESDAY",
                                       style: TextStyle(
                                           fontSize: 16,
-                                          letterSpacing: 3,
+                                          letterSpacing: 3.5,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
@@ -410,7 +472,7 @@ class _DashboardState extends State<Dashboard> {
                                       "THURSDAY",
                                       style: TextStyle(
                                           fontSize: 16,
-                                          letterSpacing: 3,
+                                          letterSpacing: 3.5,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
@@ -453,7 +515,7 @@ class _DashboardState extends State<Dashboard> {
                                       "FRIDAY",
                                       style: TextStyle(
                                           fontSize: 16,
-                                          letterSpacing: 3,
+                                          letterSpacing: 3.5,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
@@ -496,7 +558,7 @@ class _DashboardState extends State<Dashboard> {
                                       "SATURDAY",
                                       style: TextStyle(
                                           fontSize: 16,
-                                          letterSpacing: 3,
+                                          letterSpacing: 3.5,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(

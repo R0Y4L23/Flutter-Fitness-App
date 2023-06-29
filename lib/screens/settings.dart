@@ -23,7 +23,7 @@ class _SettingsState extends State<Settings> {
 
   String name = "";
   bool _isDarkModeEnabled = false;
-  bool _areNotificationsEnabled = true;
+  bool _areNotificationsEnabled = false;
 
   Future<void> getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
